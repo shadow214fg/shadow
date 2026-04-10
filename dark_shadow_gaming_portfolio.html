@@ -1,0 +1,194 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#060610;
+  --bg2:#0d0d1a;
+  --bg3:#12121f;
+  --accent:#c084fc;
+  --accent2:#818cf8;
+  --accent3:#38bdf8;
+  --text:#e2e8f0;
+  --muted:#64748b;
+  --border:rgba(192,132,252,0.15);
+}
+body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;overflow-x:hidden;}
+
+/* PARTICLES BG */
+.bg-grid{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(192,132,252,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(192,132,252,0.03) 1px,transparent 1px);
+  background-size:60px 60px;}
+.glow-orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(80px);opacity:0.12;}
+.orb1{width:400px;height:400px;background:var(--accent);top:-100px;right:-100px;}
+.orb2{width:300px;height:300px;background:var(--accent3);bottom:100px;left:-50px;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;
+  padding:1rem 2rem;background:rgba(6,6,16,0.9);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);}
+.logo{font-family:'Orbitron',monospace;font-size:18px;font-weight:900;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.nav-links{display:flex;gap:1.5rem;}
+.nav-links a{font-size:13px;color:var(--muted);text-decoration:none;letter-spacing:2px;text-transform:uppercase;transition:color .2s;}
+.nav-links a:hover{color:var(--accent);}
+
+/* HERO */
+.hero{position:relative;z-index:1;padding:5rem 2rem 3rem;display:flex;flex-direction:column;align-items:center;text-align:center;}
+.avatar-ring{width:150px;height:150px;border-radius:50%;padding:3px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2),var(--accent3));margin-bottom:1.5rem;
+  animation:spin 8s linear infinite;}
+@keyframes spin{from{filter:hue-rotate(0deg);}to{filter:hue-rotate(360deg);}}
+.avatar-inner{width:100%;height:100%;border-radius:50%;overflow:hidden;background:var(--bg);}
+.avatar-inner img{width:100%;height:100%;object-fit:cover;}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--accent);background:rgba(192,132,252,0.08);border:1px solid var(--border);
+  border-radius:20px;padding:4px 14px;margin-bottom:1rem;}
+.badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);
+  box-shadow:0 0 8px var(--accent);animation:pulse .8s ease-in-out infinite alternate;}
+@keyframes pulse{from{opacity:0.4;}to{opacity:1;}}
+.hero h1{font-family:'Orbitron',monospace;font-size:clamp(28px,5vw,52px);font-weight:900;line-height:1.1;margin-bottom:.5rem;
+  background:linear-gradient(135deg,#fff 0%,var(--accent) 50%,var(--accent2) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-sub{font-size:15px;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-bottom:1rem;}
+.hero-desc{font-size:15px;color:#94a3b8;max-width:480px;line-height:1.8;margin-bottom:2rem;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;}
+.btn-glow{padding:10px 28px;font-family:'Orbitron',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:6px;cursor:pointer;}
+.btn-ghost{padding:10px 28px;font-family:'Orbitron',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  background:transparent;color:var(--accent);border:1px solid var(--border);border-radius:6px;cursor:pointer;transition:border-color .2s;}
+.btn-ghost:hover{border-color:var(--accent);}
+
+/* STATS */
+.stats{position:relative;z-index:1;display:flex;justify-content:center;gap:2px;flex-wrap:wrap;
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.stat{text-align:center;padding:1.5rem 2.5rem;border-right:1px solid var(--border);}
+.stat:last-child{border-right:none;}
+.stat-num{font-family:'Orbitron',monospace;font-size:24px;font-weight:700;color:var(--accent);}
+.stat-label{font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-top:2px;}
+
+/* SECTION */
+.section{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:4rem 2rem;}
+.section-tag{font-size:11px;letter-spacing:3px;color:var(--accent);text-transform:uppercase;margin-bottom:.4rem;}
+.section-title{font-family:'Orbitron',monospace;font-size:22px;font-weight:700;margin-bottom:1.5rem;}
+
+/* SOCIAL CARDS */
+.social-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;}
+.social-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1.5rem;
+  transition:border-color .2s,transform .2s;cursor:pointer;text-decoration:none;display:block;}
+.social-card:hover{border-color:var(--accent);transform:translateY(-2px);}
+.platform-icon{font-size:22px;margin-bottom:10px;}
+.platform-name{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;}
+.platform-handle{font-size:12px;color:var(--muted);}
+.platform-arrow{font-size:12px;color:var(--accent);margin-top:8px;}
+
+/* ABOUT */
+.about-box{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:2rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+.about-text{font-size:14px;color:#94a3b8;line-height:1.9;}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:1rem;}
+.tag{font-size:11px;padding:4px 12px;background:rgba(192,132,252,0.08);border:1px solid var(--border);
+  border-radius:20px;color:var(--accent);letter-spacing:1px;}
+
+/* FOOTER */
+footer{text-align:center;padding:2rem;border-top:1px solid var(--border);font-size:11px;color:var(--muted);
+  letter-spacing:2px;position:relative;z-index:1;}
+</style>
+
+<div class="bg-grid"></div>
+<div class="glow-orb orb1"></div>
+<div class="glow-orb orb2"></div>
+
+<nav>
+  <div class="logo">DARK_SHADOW</div>
+  <div class="nav-links">
+    <a href="#">about</a>
+    <a href="#">content</a>
+    <a href="#">contact</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="avatar-ring">
+    <div class="avatar-inner">
+      <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCBgACAADASIAAhEBAxEB/8QAHQABAAEFAQEBAAAAAAAAAAAAAAECAwQFBwgJ/8QAKhAAAQMDAwMEAwEAAAAAAAAAAQIDBAAFERIhBhNBUWEHMXGBFCKh/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AOJ8S3a" alt="Dark Shadow" />
+    </div>
+  </div>
+  <div class="badge">▶ Gaming Creator</div>
+  <h1>DARK_SHADOW</h1>
+  <div class="hero-sub">Gamer · Content Creator · Student</div>
+  <div class="hero-desc">يوتيوبر Gaming، بحب اللعب والمحتوى. طالب هندسة كمبيوتر بيبني حاجات من الصفر.</div>
+  <div class="hero-btns">
+    <button class="btn-glow" onclick="sendPrompt('عايز اضيف سكشن لأحسن العاب اللي بلعبها')">المحتوى</button>
+    <button class="btn-ghost" onclick="sendPrompt('اعمل لي نسخة HTML كاملة من الموقع')">تحميل HTML</button>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Hours Gaming</div></div>
+  <div class="stat"><div class="stat-num">3+</div><div class="stat-label">Platforms</div></div>
+  <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Passion</div></div>
+</div>
+
+<div class="section">
+  <div class="section-tag">// connect</div>
+  <div class="section-title">تابعني على</div>
+  <div class="social-grid">
+    <a class="social-card" href="http://www.youtube.com/@shadows-s1" target="_blank">
+      <div class="platform-icon">▶</div>
+      <div class="platform-name">YouTube</div>
+      <div class="platform-handle">@shadows-s1</div>
+      <div class="platform-arrow">→ اشترك في القناة</div>
+    </a>
+    <a class="social-card" href="https://www.tiktok.com/@mrshadowx241" target="_blank">
+      <div class="platform-icon">♪</div>
+      <div class="platform-name">TikTok</div>
+      <div class="platform-handle">@mrshadowx241</div>
+      <div class="platform-arrow">→ تابع على تيك توك</div>
+    </a>
+    <a class="social-card" href="https://www.instagram.com/darkshadow3332/" target="_blank">
+      <div class="platform-icon">◈</div>
+      <div class="platform-name">Instagram</div>
+      <div class="platform-handle">@darkshadow3332</div>
+      <div class="platform-arrow">→ تابع على إنستا</div>
+    </a>
+  </div>
+</div>
+
+<div class="section" style="padding-top:0;">
+  <div class="section-tag">// about</div>
+  <div class="section-title">مين أنا؟</div>
+  <div class="about-box">
+    <div class="about-text">
+      طالب هندسة كمبيوتر وyoutuber Gaming. بعمل محتوى gaming ومشاركه مع الناس بأسلوبي الخاص.
+    </div>
+    <div class="about-text">
+      Gaming مش بس هواية — ده أسلوب حياة. كل فيديو فيه حاجة جديدة تتعلمها أو لحظة تتبسطها.
+      <div class="tags">
+        <span class="tag">Gaming</span>
+        <span class="tag">YouTube</span>
+        <span class="tag">CS Student</span>
+        <span class="tag">Content Creator</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  &copy; 2026 DARK_SHADOW — play hard, create harder
+</footer>
+
+<script>
+// Fix avatar with actual uploaded image
+const img = document.querySelector('.avatar-inner img');
+img.src = 'data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQ==';
+// Use placeholder since we can't embed the full image
+img.style.background = 'linear-gradient(135deg, #1a1a2e, #16213e)';
+img.style.display = 'flex';
+img.onerror = function() {
+  this.style.display = 'none';
+  this.parentElement.style.background = 'linear-gradient(135deg, #1a1a2e, #2d1b69)';
+  this.parentElement.innerHTML = '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:40px;">👤</div>';
+};
+img.onerror();
+</script>
