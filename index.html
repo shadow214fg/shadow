@@ -3,271 +3,629 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dark Shadow | Official Profile</title>
+<title>Dark Shadow — Gaming Creator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=DM+Sans:wght@300;400;500&family=Space+Mono&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Raleway:wght@300;400;600&display=swap');
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  font-family: 'Raleway', sans-serif;
-  background: #05050f;
-  color: #e8e4f0;
-  min-height: 100vh;
+:root {
+  --violet: #7c3aed;
+  --violet-light: #a78bfa;
+  --violet-glow: rgba(124,58,237,0.25);
+  --blue: #3b82f6;
+  --pink: #ec4899;
+  --bg: #070612;
+  --bg2: #0e0b1f;
+  --bg3: #140f2d;
+  --surface: rgba(255,255,255,0.04);
+  --border: rgba(167,139,250,0.18);
+  --text: #f1eeff;
+  --muted: #7c6da0;
+  --dim: #3d3360;
 }
-
-.page-wrapper {
-  background: #05050f;
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
   min-height: 100vh;
-  position: relative;
   overflow-x: hidden;
 }
 
-/* ---- خلفية الجزيئات المتحركة ---- */
-.particles {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-.particle {
-  position: absolute;
-  width: 2px; height: 2px;
-  background: #a78bfa;
-  border-radius: 50%;
-  opacity: 0;
-  animation: float-up linear infinite;
-}
-@keyframes float-up {
-  0%   { opacity: 0; transform: translateY(0) scale(1); }
-  10%  { opacity: 0.6; }
-  90%  { opacity: 0.2; }
-  100% { opacity: 0; transform: translateY(-100vh) scale(0.3); }
+/* ── CURSOR TRAIL ── */
+.cursor-trail {
+  position: fixed; pointer-events: none; z-index: 9999;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--violet-light);
+  transform: translate(-50%,-50%);
+  transition: left 0.05s, top 0.05s;
+  box-shadow: 0 0 12px var(--violet-light);
+  mix-blend-mode: screen;
 }
 
-/* ---- الهيدر (Navbar) ---- */
-.navbar {
-  position: relative;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center; /* سنترت اللوجو عشان الزراير اتشالت */
-  padding: 18px 32px;
-  background: rgba(10, 8, 22, 0.9);
-  border-bottom: 1px solid #a78bfa22;
-  backdrop-filter: blur(8px);
+/* ── NOISE OVERLAY ── */
+.noise {
+  position: fixed; inset: 0; pointer-events: none; z-index: 1;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px;
 }
-.nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-.nav-avatar { width: 40px; height: 40px; border-radius: 50%; border: 2px solid #a78bfa; overflow: hidden; }
-.nav-avatar img { width: 100%; height: 100%; object-fit: cover; }
-.nav-name { font-family: 'Cinzel', serif; font-size: 16px; font-weight: 700; color: #fff; letter-spacing: 3px; }
 
-/* ---- قسم الترحيب (Hero) ---- */
-.hero {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 80px 20px 60px;
+/* ── GRID BG ── */
+.grid-bg {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    linear-gradient(rgba(124,58,237,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124,58,237,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
 }
-.avatar-container {
-  position: relative;
-  width: 220px; height: 220px;
-  margin-bottom: 30px;
-}
-.avatar-glow {
-  position: absolute;
-  inset: -10px;
-  border-radius: 50%;
-  background: conic-gradient(from 0deg, #a78bfa, #60a5fa, #34d399, #a78bfa);
-  animation: rotate-glow 6s linear infinite;
-  opacity: 0.8;
-}
-@keyframes rotate-glow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-.avatar-img { position: absolute; inset: 8px; border-radius: 50%; overflow: hidden; z-index: 2; background: #1a0a3a; }
-.avatar-img img { width: 100%; height: 100%; object-fit: cover; }
 
-.hero-name {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(40px, 9vw, 72px);
-  font-weight: 900;
-  letter-spacing: 8px;
-  color: #f3f0ff;
-  text-shadow: 0 0 50px rgba(167, 139, 250, 0.4);
-  margin-bottom: 15px;
+/* ── ORBS ── */
+.orb {
+  position: fixed; border-radius: 50%; pointer-events: none; z-index: 0;
+  filter: blur(80px); opacity: 0.35;
 }
-.hero-tagline { color: #a78bfa; letter-spacing: 4px; font-size: 14px; text-transform: uppercase; margin-bottom: 30px; }
+.orb-1 { width: 600px; height: 600px; background: #4c1d95; top: -200px; left: -200px; }
+.orb-2 { width: 500px; height: 500px; background: #1e1b4b; bottom: -100px; right: -100px; }
+.orb-3 { width: 300px; height: 300px; background: #831843; top: 40%; left: 50%; transform: translate(-50%,-50%); opacity: 0.2; }
 
-/* ---- شبكة المعلومات (تملأ الصفحة) ---- */
-.content-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 25px;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 20px;
-  position: relative;
-  z-index: 5;
+/* ── NAVBAR ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; height: 60px;
+  background: rgba(7,6,18,0.85);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(16px);
 }
-.info-card {
-  background: rgba(16, 12, 36, 0.7);
-  border: 1px solid rgba(167, 139, 250, 0.15);
-  border-radius: 20px;
-  padding: 30px;
-  backdrop-filter: blur(12px);
-  transition: all 0.3s ease;
-}
-.info-card:hover { transform: translateY(-8px); border-color: #a78bfa; box-shadow: 0 10px 30px rgba(167, 139, 250, 0.1); }
-.info-card h3 { font-family: 'Cinzel', serif; color: #a78bfa; margin-bottom: 20px; font-size: 18px; border-left: 4px solid #a78bfa; padding-left: 15px; }
-
-.data-item { display: flex; justify-content: space-between; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
-.data-label { color: #7c6da0; font-size: 14px; }
-.data-value { color: #fff; font-weight: 600; font-size: 14px; }
-
-/* ---- سكشن سوشيال ميديا (ستايل Meowlyva) ---- */
-.social-section { max-width: 1200px; margin: 60px auto; padding: 0 20px; position: relative; z-index: 5; }
-.section-heading { font-family: 'Cinzel', serif; font-size: 36px; margin-bottom: 40px; font-weight: 900; text-align: left; letter-spacing: 2px; }
-
-.social-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
-.social-tile {
-  background: #0d0d1a;
-  border: 1px solid rgba(167, 139, 250, 0.1);
-  border-radius: 16px;
-  padding: 35px 20px;
+.nav-brand {
+  font-family: 'Orbitron', monospace;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 4px; color: var(--violet-light);
   text-decoration: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  transition: 0.4s;
 }
-.social-tile:hover { background: #16162d; border-color: #a78bfa; transform: scale(1.03); }
-.tile-icon { font-size: 40px; }
-.tile-name { color: #fff; font-family: 'Cinzel', serif; font-weight: 700; font-size: 18px; }
-.tile-action { color: #7c6da0; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a {
+  font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--muted); text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--violet-light); }
+.nav-status {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 11px; color: var(--muted);
+}
+.status-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: #4ade80;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%,100% { box-shadow: 0 0 0 0 rgba(74,222,128,0.4); }
+  50% { box-shadow: 0 0 0 5px rgba(74,222,128,0); }
+}
 
-/* ---- شريط الإحصائيات ---- */
+/* ── HERO ── */
+.hero {
+  position: relative; z-index: 2;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 80px 24px 40px;
+  text-align: center;
+}
+
+/* avatar */
+.avatar-wrap {
+  position: relative; width: 180px; height: 180px; margin-bottom: 32px;
+}
+.avatar-spin {
+  position: absolute; inset: -12px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--violet), var(--blue), var(--pink), var(--violet));
+  animation: spin 8s linear infinite;
+  opacity: 0.85;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.avatar-ring {
+  position: absolute; inset: -2px; border-radius: 50%;
+  background: var(--bg);
+}
+.avatar-inner {
+  position: absolute; inset: 12px; border-radius: 50%;
+  background: var(--bg3);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; z-index: 2;
+  font-size: 72px;
+}
+.avatar-inner img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+
+/* hero text */
+.hero-eyebrow {
+  font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--violet-light); margin-bottom: 12px;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: ''; display: block; width: 32px; height: 1px; background: var(--border);
+}
+.hero-name {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(44px, 10vw, 82px);
+  font-weight: 900; letter-spacing: 4px;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.hero-name span {
+  background: linear-gradient(135deg, var(--violet-light), var(--blue));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px; color: var(--muted);
+  letter-spacing: 2px; margin-bottom: 24px;
+}
+.hero-chips {
+  display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 28px;
+}
+.chip {
+  font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 5px 14px; border-radius: 99px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--violet-light);
+}
+
+/* socials */
+.hero-socials {
+  display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-bottom: 24px;
+}
+.soc-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 22px; border-radius: 99px;
+  font-size: 12px; font-weight: 500; letter-spacing: 1px;
+  text-decoration: none; border: 1px solid;
+  transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+.soc-btn:hover { transform: translateY(-2px); }
+.soc-yt { border-color: rgba(239,68,68,0.4); color: #fca5a5; background: rgba(239,68,68,0.06); }
+.soc-yt:hover { background: rgba(239,68,68,0.15); box-shadow: 0 8px 24px rgba(239,68,68,0.15); }
+.soc-tt { border-color: rgba(59,130,246,0.4); color: #93c5fd; background: rgba(59,130,246,0.06); }
+.soc-tt:hover { background: rgba(59,130,246,0.15); box-shadow: 0 8px 24px rgba(59,130,246,0.15); }
+.soc-ig { border-color: rgba(236,72,153,0.4); color: #f9a8d4; background: rgba(236,72,153,0.06); }
+.soc-ig:hover { background: rgba(236,72,153,0.15); box-shadow: 0 8px 24px rgba(236,72,153,0.15); }
+
+/* scroll hint */
+.scroll-hint {
+  position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: var(--dim); font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  animation: bob 2s ease-in-out infinite;
+}
+@keyframes bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+.scroll-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, var(--dim), transparent);
+}
+
+/* ── STATS TICKER ── */
 .stats-bar {
-  background: rgba(10, 8, 22, 0.95);
-  border-top: 1px solid rgba(167, 139, 250, 0.2);
-  display: flex; justify-content: center; flex-wrap: wrap; padding: 30px 0; margin-top: 60px;
+  position: relative; z-index: 3;
+  background: rgba(14,11,31,0.98);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  display: flex; justify-content: center; flex-wrap: wrap;
 }
-.stat-item { padding: 15px 50px; border-right: 1px solid rgba(167, 139, 250, 0.1); text-align: center; }
-.stat-item:last-child { border-right: none; }
-.stat-num { font-family: 'Cinzel', serif; font-size: 32px; font-weight: 900; color: #fff; display: block; }
-.stat-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #a78bfa; margin-top: 5px; }
+.stat-cell {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 20px 44px;
+  border-right: 1px solid rgba(167,139,250,0.1);
+  gap: 4px;
+}
+.stat-cell:last-child { border-right: none; }
+.stat-num {
+  font-family: 'Orbitron', monospace;
+  font-size: 28px; font-weight: 700; color: #fff;
+  min-height: 38px; display: flex; align-items: center;
+}
+.stat-lbl { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+.stat-icon { font-size: 16px; margin-bottom: 2px; }
 
-.footer { text-align: center; padding: 40px; font-size: 12px; color: #4a3f6b; border-top: 1px solid rgba(167, 139, 250, 0.1); background: #05050f; }
+/* ── SECTION WRAPPER ── */
+.section {
+  position: relative; z-index: 2;
+  max-width: 900px; margin: 0 auto; padding: 80px 24px;
+}
+.section-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 11px; font-weight: 700; letter-spacing: 5px;
+  text-transform: uppercase; color: var(--violet-light);
+  display: flex; align-items: center; gap: 16px; margin-bottom: 40px;
+}
+.section-title::after {
+  content: ''; flex: 1; height: 1px; background: var(--border);
+}
+
+/* ── WHO IS SHADOW ── */
+.who-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+}
+@media(max-width:640px){ .who-grid { grid-template-columns: 1fr; } }
+.who-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px; padding: 24px;
+}
+.who-label {
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 6px;
+}
+.who-val {
+  font-size: 18px; font-weight: 500; color: var(--text);
+}
+.who-bio {
+  grid-column: 1 / -1;
+}
+.who-bio p {
+  font-size: 15px; line-height: 1.9; color: #b5a8d4;
+}
+.who-avatar-card {
+  display: flex; align-items: center; gap: 20px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 24px;
+  grid-column: 1 / -1;
+}
+.who-avatar-img {
+  width: 90px; height: 90px; border-radius: 50%;
+  background: var(--bg3); border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 40px; overflow: hidden; flex-shrink: 0;
+}
+.who-avatar-img img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ── SETUP ── */
+.setup-list {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px;
+}
+.setup-item {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 18px 20px;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.setup-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--dim); }
+.setup-val { font-size: 15px; font-weight: 500; color: var(--text); }
+.setup-bar-wrap {
+  height: 3px; background: rgba(167,139,250,0.1); border-radius: 99px; margin-top: 8px;
+}
+.setup-bar { height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--violet), var(--blue)); }
+
+/* ── FAVORITES ── */
+.favs-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 14px;
+}
+.fav-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 24px 20px;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  text-align: center;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.fav-card:hover { border-color: rgba(167,139,250,0.5); transform: translateY(-4px); }
+.fav-emoji { font-size: 36px; }
+.fav-cat { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+.fav-name { font-size: 14px; font-weight: 500; color: var(--text); }
+
+/* ── SOCIAL SHOWCASE ── */
+.social-showcase {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px;
+}
+.social-card {
+  border-radius: 16px; padding: 28px 24px;
+  display: flex; flex-direction: column; gap: 14px;
+  border: 1px solid;
+  text-decoration: none;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.social-card:hover { transform: translateY(-4px); }
+.social-card.yt { border-color: rgba(239,68,68,0.3); background: rgba(239,68,68,0.05); }
+.social-card.yt:hover { box-shadow: 0 12px 40px rgba(239,68,68,0.12); }
+.social-card.tt { border-color: rgba(59,130,246,0.3); background: rgba(59,130,246,0.05); }
+.social-card.tt:hover { box-shadow: 0 12px 40px rgba(59,130,246,0.12); }
+.social-card.ig { border-color: rgba(236,72,153,0.3); background: rgba(236,72,153,0.05); }
+.social-card.ig:hover { box-shadow: 0 12px 40px rgba(236,72,153,0.12); }
+.soc-icon { font-size: 28px; }
+.soc-name { font-family: 'Orbitron', monospace; font-size: 14px; font-weight: 700; color: #fff; }
+.soc-handle { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); }
+.soc-cta {
+  margin-top: auto; display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+}
+.soc-cta.yt { color: #fca5a5; }
+.soc-cta.tt { color: #93c5fd; }
+.soc-cta.ig { color: #f9a8d4; }
+
+/* ── FOOTER ── */
+footer {
+  position: relative; z-index: 2;
+  border-top: 1px solid var(--border);
+  padding: 40px 24px;
+  text-align: center;
+}
+.footer-name {
+  font-family: 'Orbitron', monospace;
+  font-size: 22px; font-weight: 900;
+  color: #fff; margin-bottom: 8px;
+}
+.footer-sub { font-size: 12px; color: var(--muted); letter-spacing: 2px; margin-bottom: 4px; }
+.footer-copy { font-size: 11px; color: var(--dim); }
+
+/* ── ANIMATIONS ── */
+.fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s, transform 0.7s; }
+.fade-in.visible { opacity: 1; transform: none; }
 </style>
 </head>
 <body>
 
-<div class="page-wrapper">
-  <div class="particles" id="particles"></div>
+<div class="noise"></div>
+<div class="grid-bg"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+<div class="cursor-trail" id="trail"></div>
 
-  <nav class="navbar">
-    <a class="nav-logo" href="#">
-      <div class="nav-avatar"><img src="Untitled14_20260303000226.jpg" alt="Shadow"></div>
-      <span class="nav-name">DARK SHADOW</span>
-    </a>
-  </nav>
-
-  <section class="hero">
-    <div class="avatar-container">
-      <div class="avatar-glow"></div>
-      <div class="avatar-img"><img src="Untitled14_20260303000226.jpg" alt="Shadow"></div>
-    </div>
-    <h1 class="hero-name">DARK SHADOW</h1>
-    <p class="hero-tagline">Computer Science Engineer &bull; Gaming Creator</p>
-  </section>
-
-  <div class="content-grid">
-    <div class="info-card">
-      <h3>✦ Identity</h3>
-      <div class="data-item"><span class="data-label">Birth Date:</span><span class="data-value">May 3, 2010</span></div>
-      <div class="data-item"><span class="data-label">Current Age:</span><span class="data-value">16 Years</span></div>
-      <div class="data-item"><span class="data-label">Height:</span><span class="data-value">160 cm</span></div>
-      <div class="data-item"><span class="data-label">Location:</span><span class="data-value">Egypt</span></div>
-    </div>
-
-    <div class="info-card">
-      <h3>✦ The Setup</h3>
-      <div class="data-item"><span class="data-label">Processor:</span><span class="data-value">Intel i3 10th Gen</span></div>
-      <div class="data-item"><span class="data-label">GPU:</span><span class="data-value">Integrated 8GB</span></div>
-      <div class="data-item"><span class="data-label">Memory:</span><span class="data-value">8GB RAM</span></div>
-      <div class="data-item"><span class="data-label">Display:</span><span class="data-value">60Hz Monitor</span></div>
-    </div>
-
-    <div class="info-card">
-      <h3>✦ Personal Picks</h3>
-      <div class="data-item"><span class="data-label">Best Game:</span><span class="data-value">Valorant</span></div>
-      <div class="data-item"><span class="data-label">Best Anime:</span><span class="data-value">Demon Slayer</span></div>
-      <div class="data-item"><span class="data-label">Food:</span><span class="data-value">Burger</span></div>
-      <div class="data-item"><span class="data-label">Drink:</span><span class="data-value">Hot Chocolate</span></div>
-    </div>
-
-    <div class="info-card">
-      <h3>✦ Sports Life</h3>
-      <div class="data-item"><span class="data-label">Favorite Sport:</span><span class="data-value">Volleyball</span></div>
-      <div class="data-item"><span class="data-label">Active In:</span><span class="data-value">Football</span></div>
-      <div class="data-item"><span class="data-label">Team Role:</span><span class="data-value">Gamer / Athlete</span></div>
-    </div>
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#">DARK SHADOW</a>
+  <ul class="nav-links">
+    <li><a href="#who">About</a></li>
+    <li><a href="#setup">Setup</a></li>
+    <li><a href="#favorites">Favorites</a></li>
+    <li><a href="#connect">Connect</a></li>
+  </ul>
+  <div class="nav-status">
+    <span class="status-dot"></span>
+    Online
   </div>
+</nav>
 
-  <div class="social-section">
-    <h2 class="section-heading">Find Me Everywhere</h2>
-    <div class="social-tiles">
-      <a href="http://www.youtube.com/@shadows-s1" class="social-tile" target="_blank">
-        <span class="tile-icon">▶</span>
-        <span class="tile-name">YouTube</span>
-        <span class="tile-action">Subscribe Now</span>
-      </a>
-      <a href="https://www.tiktok.com/@mrshadowx241" class="social-tile" target="_blank">
-        <span class="tile-icon">♪</span>
-        <span class="tile-name">TikTok</span>
-        <span class="tile-action">Follow for Clips</span>
-      </a>
-      <a href="https://www.instagram.com/darkshadow3332/" class="social-tile" target="_blank">
-        <span class="tile-icon">📸</span>
-        <span class="tile-name">Instagram</span>
-        <span class="tile-action">See My Life</span>
-      </a>
-      <a href="#" class="social-tile">
-        <span class="tile-icon">💬</span>
-        <span class="tile-name">Discord</span>
-        <span class="tile-action">Join Community</span>
-      </a>
-    </div>
+<!-- HERO -->
+<section class="hero">
+  <div class="avatar-wrap">
+    <div class="avatar-spin"></div>
+    <div class="avatar-ring"></div>
+    <div class="avatar-inner" id="heroAvatar">🎮</div>
   </div>
-
-  <div class="stats-bar">
-    <div class="stat-item"><span class="stat-num">47</span><span class="stat-label">Games Mastered</span></div>
-    <div class="stat-item"><span class="stat-num">12</span><span class="stat-label">Videos Created</span></div>
-    <div class="stat-item"><span class="stat-num">99</span><span class="stat-label">Shadow LVL</span></div>
+  <div class="hero-eyebrow">Gaming Creator</div>
+  <h1 class="hero-name">DARK <span>SHADOW</span></h1>
+  <p class="hero-sub">// CS Student &nbsp;·&nbsp; Content Creator &nbsp;·&nbsp; Gamer</p>
+  <div class="hero-chips">
+    <span class="chip">Gaming</span>
+    <span class="chip">YouTube</span>
+    <span class="chip">TikTok</span>
+    <span class="chip">Anime Fan</span>
+    <span class="chip">Level 16</span>
   </div>
+  <div class="hero-socials">
+    <a class="soc-btn soc-yt" href="http://www.youtube.com/@shadows-s1" target="_blank">▶ YouTube</a>
+    <a class="soc-btn soc-tt" href="https://www.tiktok.com/@mrshadowx241" target="_blank">♪ TikTok</a>
+    <a class="soc-btn soc-ig" href="https://www.instagram.com/darkshadow3332/" target="_blank">◈ Instagram</a>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</section>
 
-  <footer class="footer">
-    DARK SHADOW © 2026 | ALL RIGHTS RESERVED | EMPOWERED BY TECH
-  </footer>
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-cell">
+    <span class="stat-icon">🎮</span>
+    <span class="stat-num" id="sGames">0</span>
+    <span class="stat-lbl">Games Played</span>
+  </div>
+  <div class="stat-cell">
+    <span class="stat-icon">▶</span>
+    <span class="stat-num" id="sVids">0</span>
+    <span class="stat-lbl">Videos</span>
+  </div>
+  <div class="stat-cell">
+    <span class="stat-icon">⚡</span>
+    <span class="stat-num" id="sLvl">0</span>
+    <span class="stat-lbl">Shadow Level</span>
+  </div>
+  <div class="stat-cell">
+    <span class="stat-icon">♥</span>
+    <span class="stat-num" id="sLove">0</span>
+    <span class="stat-lbl">Love For You</span>
+  </div>
 </div>
 
-<script>
-// جزيئات الخلفية
-(function() {
-  const container = document.getElementById('particles');
-  for (let i = 0; i < 60; i++) {
-    const p = document.createElement('div');
-    p.className = 'particle';
-    p.style.left = Math.random() * 100 + '%';
-    p.style.top = Math.random() * 100 + '%';
-    p.style.animationDuration = (6 + Math.random() * 12) + 's';
-    p.style.animationDelay = (Math.random() * 5) + 's';
-    container.appendChild(p);
-  }
-})();
-</script>
+<!-- WHO IS SHADOW -->
+<section class="section fade-in" id="who">
+  <h2 class="section-title">Who Is Shadow</h2>
+  <div class="who-grid">
+    <div class="who-avatar-card">
+      <div class="who-avatar-img" id="aboutAvatar">🎮</div>
+      <div>
+        <div style="font-family:'Orbitron',monospace;font-size:20px;font-weight:700;color:#fff;margin-bottom:6px;">Dark Shadow</div>
+        <div style="font-size:14px;color:var(--muted);line-height:1.7;">
+          A 16-year-old CS student who lives for gaming and content creation. 
+          Passionate about connecting with the community through authentic gameplay and good vibes.
+          Shadow is always leveling up — in-game and in life.
+        </div>
+      </div>
+    </div>
+    <div class="who-card">
+      <div class="who-label">Age</div>
+      <div class="who-val">16 years old</div>
+    </div>
+    <div class="who-card">
+      <div class="who-label">Birthday</div>
+      <div class="who-val">May 3rd, 2010</div>
+    </div>
+    <div class="who-card">
+      <div class="who-label">Height</div>
+      <div class="who-val">160 cm</div>
+    </div>
+    <div class="who-card">
+      <div class="who-label">Field</div>
+      <div class="who-val">CS Student</div>
+    </div>
+  </div>
+</section>
 
+<!-- SETUP -->
+<section class="section fade-in" id="setup">
+  <h2 class="section-title">My Setup</h2>
+  <div class="setup-list">
+    <div class="setup-item">
+      <span class="setup-label">Processor</span>
+      <span class="setup-val">Intel i3 Gen 10</span>
+      <div class="setup-bar-wrap"><div class="setup-bar" style="width:60%"></div></div>
+    </div>
+    <div class="setup-item">
+      <span class="setup-label">Graphics</span>
+      <span class="setup-val">Integrated GPU</span>
+      <div class="setup-bar-wrap"><div class="setup-bar" style="width:40%"></div></div>
+    </div>
+    <div class="setup-item">
+      <span class="setup-label">Memory</span>
+      <span class="setup-val">8 GB RAM</span>
+      <div class="setup-bar-wrap"><div class="setup-bar" style="width:55%"></div></div>
+    </div>
+    <div class="setup-item">
+      <span class="setup-label">Monitor</span>
+      <span class="setup-val">60 Hz Display</span>
+      <div class="setup-bar-wrap"><div class="setup-bar" style="width:50%"></div></div>
+    </div>
+  </div>
+  <div style="margin-top:16px;padding:16px 20px;background:var(--surface);border:1px solid var(--border);border-radius:12px;font-family:'Space Mono',monospace;font-size:12px;color:var(--muted);line-height:1.8;">
+    <span style="color:var(--violet-light)">// shadow's note:</span><br>
+    Budget setup but max performance energy. Skill &gt; specs every time. 🎯
+  </div>
+</section>
+
+<!-- FAVORITES -->
+<section class="section fade-in" id="favorites">
+  <h2 class="section-title">Favorites</h2>
+  <div class="favs-grid">
+    <div class="fav-card">
+      <div class="fav-emoji">🎮</div>
+      <div class="fav-cat">Favorite Game</div>
+      <div class="fav-name">Valorant</div>
+    </div>
+    <div class="fav-card">
+      <div class="fav-emoji">🗡️</div>
+      <div class="fav-cat">Favorite Anime</div>
+      <div class="fav-name">Demon Slayer</div>
+    </div>
+    <div class="fav-card">
+      <div class="fav-emoji">🍔</div>
+      <div class="fav-cat">Favorite Food</div>
+      <div class="fav-name">Burger</div>
+    </div>
+    <div class="fav-card">
+      <div class="fav-emoji">☕</div>
+      <div class="fav-cat">Favorite Drink</div>
+      <div class="fav-name">Hot Chocolate</div>
+    </div>
+    <div class="fav-card">
+      <div class="fav-emoji">🏐</div>
+      <div class="fav-cat">Favorite Sport</div>
+      <div class="fav-name">Volleyball</div>
+    </div>
+    <div class="fav-card">
+      <div class="fav-emoji">⚽</div>
+      <div class="fav-cat">Also Loves</div>
+      <div class="fav-name">Football</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONNECT -->
+<section class="section fade-in" id="connect">
+  <h2 class="section-title">Connect With Me</h2>
+  <div class="social-showcase">
+    <a class="social-card yt" href="http://www.youtube.com/@shadows-s1" target="_blank">
+      <div class="soc-icon">📺</div>
+      <div class="soc-name">YouTube</div>
+      <div class="soc-handle">@shadows-s1</div>
+      <div class="soc-cta yt">Watch Now →</div>
+    </a>
+    <a class="social-card tt" href="https://www.tiktok.com/@mrshadowx241" target="_blank">
+      <div class="soc-icon">🎵</div>
+      <div class="soc-name">TikTok</div>
+      <div class="soc-handle">@mrshadowx241</div>
+      <div class="soc-cta tt">Follow →</div>
+    </a>
+    <a class="social-card ig" href="https://www.instagram.com/darkshadow3332/" target="_blank">
+      <div class="soc-icon">📷</div>
+      <div class="soc-name">Instagram</div>
+      <div class="soc-handle">@darkshadow3332</div>
+      <div class="soc-cta ig">Follow →</div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">DARK SHADOW</div>
+  <div class="footer-sub">Gaming &amp; Content Creator</div>
+  <div class="footer-copy">© 2026 Dark Shadow · All rights reserved</div>
+</footer>
+
+<script>
+// Cursor trail
+const trail = document.getElementById('trail');
+document.addEventListener('mousemove', e => {
+  trail.style.left = e.clientX + 'px';
+  trail.style.top = e.clientY + 'px';
+});
+
+// Count-up
+function countUp(el, target, dur) {
+  let n = 0, step = target / (dur / 16);
+  const t = setInterval(() => {
+    n = Math.min(n + step, target);
+    el.textContent = Math.round(n);
+    if (n >= target) clearInterval(t);
+  }, 16);
+}
+const statsObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      countUp(document.getElementById('sGames'), 47, 1400);
+      countUp(document.getElementById('sVids'), 12, 1100);
+      countUp(document.getElementById('sLvl'), 99, 2000);
+      countUp(document.getElementById('sLove'), 100, 1700);
+      statsObs.disconnect();
+    }
+  });
+}, { threshold: 0.3 });
+statsObs.observe(document.querySelector('.stats-bar'));
+
+// Fade-in on scroll
+const faders = document.querySelectorAll('.fade-in');
+const fadeObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1 });
+faders.forEach(f => fadeObs.observe(f));
+
+// Avatar image loader
+const avatarSrc = null; // Set to your image base64 or URL
+if (avatarSrc) {
+  [document.getElementById('heroAvatar'), document.getElementById('aboutAvatar')].forEach(el => {
+    const img = document.createElement('img');
+    img.src = avatarSrc;
+    img.style.cssText = 'width:100%;height:100%;object-fit:cover;border-radius:50%;';
+    el.innerHTML = '';
+    el.appendChild(img);
+  });
+}
+</script>
 </body>
 </html>
