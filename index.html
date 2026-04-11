@@ -1,196 +1,273 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dark Shadow | Official Profile</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap');
-*{margin:0;padding:0;box-sizing:border-box;}
-:root{
-  --bg:#060610;
-  --bg2:#0d0d1a;
-  --bg3:#12121f;
-  --accent:#c084fc;
-  --accent2:#818cf8;
-  --accent3:#38bdf8;
-  --text:#e2e8f0;
-  --muted:#64748b;
-  --border:rgba(192,132,252,0.15);
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Raleway:wght@300;400;600&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Raleway', sans-serif;
+  background: #05050f;
+  color: #e8e4f0;
+  min-height: 100vh;
 }
-body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;overflow-x:hidden;}
 
-/* PARTICLES BG */
-.bg-grid{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;
-  background-image:linear-gradient(rgba(192,132,252,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(192,132,252,0.03) 1px,transparent 1px);
-  background-size:60px 60px;}
-.glow-orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(80px);opacity:0.12;}
-.orb1{width:400px;height:400px;background:var(--accent);top:-100px;right:-100px;}
-.orb2{width:300px;height:300px;background:var(--accent3);bottom:100px;left:-50px;}
+.page-wrapper {
+  background: #05050f;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
 
-/* NAV */
-nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;
-  padding:1rem 2rem;background:rgba(6,6,16,0.9);backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--border);}
-.logo{font-family:'Orbitron',monospace;font-size:18px;font-weight:900;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.nav-links{display:flex;gap:1.5rem;}
-.nav-links a{font-size:13px;color:var(--muted);text-decoration:none;letter-spacing:2px;text-transform:uppercase;transition:color .2s;}
-.nav-links a:hover{color:var(--accent);}
+/* ---- خلفية الجزيئات المتحركة ---- */
+.particles {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.particle {
+  position: absolute;
+  width: 2px; height: 2px;
+  background: #a78bfa;
+  border-radius: 50%;
+  opacity: 0;
+  animation: float-up linear infinite;
+}
+@keyframes float-up {
+  0%   { opacity: 0; transform: translateY(0) scale(1); }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.2; }
+  100% { opacity: 0; transform: translateY(-100vh) scale(0.3); }
+}
 
-/* HERO */
-.hero{position:relative;z-index:1;padding:5rem 2rem 3rem;display:flex;flex-direction:column;align-items:center;text-align:center;}
-.avatar-ring{width:150px;height:150px;border-radius:50%;padding:3px;
-  background:linear-gradient(135deg,var(--accent),var(--accent2),var(--accent3));margin-bottom:1.5rem;
-  animation:spin 8s linear infinite;}
-@keyframes spin{from{filter:hue-rotate(0deg);}to{filter:hue-rotate(360deg);}}
-.avatar-inner{width:100%;height:100%;border-radius:50%;overflow:hidden;background:var(--bg);}
-.avatar-inner img{width:100%;height:100%;object-fit:cover;}
-.badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:2px;text-transform:uppercase;
-  color:var(--accent);background:rgba(192,132,252,0.08);border:1px solid var(--border);
-  border-radius:20px;padding:4px 14px;margin-bottom:1rem;}
-.badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);
-  box-shadow:0 0 8px var(--accent);animation:pulse .8s ease-in-out infinite alternate;}
-@keyframes pulse{from{opacity:0.4;}to{opacity:1;}}
-.hero h1{font-family:'Orbitron',monospace;font-size:clamp(28px,5vw,52px);font-weight:900;line-height:1.1;margin-bottom:.5rem;
-  background:linear-gradient(135deg,#fff 0%,var(--accent) 50%,var(--accent2) 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.hero-sub{font-size:15px;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-bottom:1rem;}
-.hero-desc{font-size:15px;color:#94a3b8;max-width:480px;line-height:1.8;margin-bottom:2rem;}
-.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;}
-.btn-glow{padding:10px 28px;font-family:'Orbitron',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:6px;cursor:pointer;}
-.btn-ghost{padding:10px 28px;font-family:'Orbitron',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;
-  background:transparent;color:var(--accent);border:1px solid var(--border);border-radius:6px;cursor:pointer;transition:border-color .2s;}
-.btn-ghost:hover{border-color:var(--accent);}
+/* ---- الهيدر (Navbar) ---- */
+.navbar {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* سنترت اللوجو عشان الزراير اتشالت */
+  padding: 18px 32px;
+  background: rgba(10, 8, 22, 0.9);
+  border-bottom: 1px solid #a78bfa22;
+  backdrop-filter: blur(8px);
+}
+.nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.nav-avatar { width: 40px; height: 40px; border-radius: 50%; border: 2px solid #a78bfa; overflow: hidden; }
+.nav-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.nav-name { font-family: 'Cinzel', serif; font-size: 16px; font-weight: 700; color: #fff; letter-spacing: 3px; }
 
-/* STATS */
-.stats{position:relative;z-index:1;display:flex;justify-content:center;gap:2px;flex-wrap:wrap;
-  border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
-.stat{text-align:center;padding:1.5rem 2.5rem;border-right:1px solid var(--border);}
-.stat:last-child{border-right:none;}
-.stat-num{font-family:'Orbitron',monospace;font-size:24px;font-weight:700;color:var(--accent);}
-.stat-label{font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-top:2px;}
+/* ---- قسم الترحيب (Hero) ---- */
+.hero {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 80px 20px 60px;
+}
+.avatar-container {
+  position: relative;
+  width: 220px; height: 220px;
+  margin-bottom: 30px;
+}
+.avatar-glow {
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, #a78bfa, #60a5fa, #34d399, #a78bfa);
+  animation: rotate-glow 6s linear infinite;
+  opacity: 0.8;
+}
+@keyframes rotate-glow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.avatar-img { position: absolute; inset: 8px; border-radius: 50%; overflow: hidden; z-index: 2; background: #1a0a3a; }
+.avatar-img img { width: 100%; height: 100%; object-fit: cover; }
 
-/* SECTION */
-.section{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:4rem 2rem;}
-.section-tag{font-size:11px;letter-spacing:3px;color:var(--accent);text-transform:uppercase;margin-bottom:.4rem;}
-.section-title{font-family:'Orbitron',monospace;font-size:22px;font-weight:700;margin-bottom:1.5rem;}
+.hero-name {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(40px, 9vw, 72px);
+  font-weight: 900;
+  letter-spacing: 8px;
+  color: #f3f0ff;
+  text-shadow: 0 0 50px rgba(167, 139, 250, 0.4);
+  margin-bottom: 15px;
+}
+.hero-tagline { color: #a78bfa; letter-spacing: 4px; font-size: 14px; text-transform: uppercase; margin-bottom: 30px; }
 
-/* SOCIAL CARDS */
-.social-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;}
-.social-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1.5rem;
-  transition:border-color .2s,transform .2s;cursor:pointer;text-decoration:none;display:block;}
-.social-card:hover{border-color:var(--accent);transform:translateY(-2px);}
-.platform-icon{font-size:22px;margin-bottom:10px;}
-.platform-name{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;}
-.platform-handle{font-size:12px;color:var(--muted);}
-.platform-arrow{font-size:12px;color:var(--accent);margin-top:8px;}
+/* ---- شبكة المعلومات (تملأ الصفحة) ---- */
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  position: relative;
+  z-index: 5;
+}
+.info-card {
+  background: rgba(16, 12, 36, 0.7);
+  border: 1px solid rgba(167, 139, 250, 0.15);
+  border-radius: 20px;
+  padding: 30px;
+  backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+}
+.info-card:hover { transform: translateY(-8px); border-color: #a78bfa; box-shadow: 0 10px 30px rgba(167, 139, 250, 0.1); }
+.info-card h3 { font-family: 'Cinzel', serif; color: #a78bfa; margin-bottom: 20px; font-size: 18px; border-left: 4px solid #a78bfa; padding-left: 15px; }
 
-/* ABOUT */
-.about-box{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:2rem;
-  display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
-.about-text{font-size:14px;color:#94a3b8;line-height:1.9;}
-.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:1rem;}
-.tag{font-size:11px;padding:4px 12px;background:rgba(192,132,252,0.08);border:1px solid var(--border);
-  border-radius:20px;color:var(--accent);letter-spacing:1px;}
+.data-item { display: flex; justify-content: space-between; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.data-label { color: #7c6da0; font-size: 14px; }
+.data-value { color: #fff; font-weight: 600; font-size: 14px; }
 
-/* FOOTER */
-footer{text-align:center;padding:2rem;border-top:1px solid var(--border);font-size:11px;color:var(--muted);
-  letter-spacing:2px;position:relative;z-index:1;}
+/* ---- سكشن سوشيال ميديا (ستايل Meowlyva) ---- */
+.social-section { max-width: 1200px; margin: 60px auto; padding: 0 20px; position: relative; z-index: 5; }
+.section-heading { font-family: 'Cinzel', serif; font-size: 36px; margin-bottom: 40px; font-weight: 900; text-align: left; letter-spacing: 2px; }
+
+.social-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+.social-tile {
+  background: #0d0d1a;
+  border: 1px solid rgba(167, 139, 250, 0.1);
+  border-radius: 16px;
+  padding: 35px 20px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  transition: 0.4s;
+}
+.social-tile:hover { background: #16162d; border-color: #a78bfa; transform: scale(1.03); }
+.tile-icon { font-size: 40px; }
+.tile-name { color: #fff; font-family: 'Cinzel', serif; font-weight: 700; font-size: 18px; }
+.tile-action { color: #7c6da0; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+
+/* ---- شريط الإحصائيات ---- */
+.stats-bar {
+  background: rgba(10, 8, 22, 0.95);
+  border-top: 1px solid rgba(167, 139, 250, 0.2);
+  display: flex; justify-content: center; flex-wrap: wrap; padding: 30px 0; margin-top: 60px;
+}
+.stat-item { padding: 15px 50px; border-right: 1px solid rgba(167, 139, 250, 0.1); text-align: center; }
+.stat-item:last-child { border-right: none; }
+.stat-num { font-family: 'Cinzel', serif; font-size: 32px; font-weight: 900; color: #fff; display: block; }
+.stat-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #a78bfa; margin-top: 5px; }
+
+.footer { text-align: center; padding: 40px; font-size: 12px; color: #4a3f6b; border-top: 1px solid rgba(167, 139, 250, 0.1); background: #05050f; }
 </style>
+</head>
+<body>
 
-<div class="bg-grid"></div>
-<div class="glow-orb orb1"></div>
-<div class="glow-orb orb2"></div>
+<div class="page-wrapper">
+  <div class="particles" id="particles"></div>
 
-<nav>
-  <div class="logo">DARK_SHADOW</div>
-  <div class="nav-links">
-    <a href="#">about</a>
-    <a href="#">content</a>
-    <a href="#">contact</a>
-  </div>
-</nav>
+  <nav class="navbar">
+    <a class="nav-logo" href="#">
+      <div class="nav-avatar"><img src="Untitled14_20260303000226.jpg" alt="Shadow"></div>
+      <span class="nav-name">DARK SHADOW</span>
+    </a>
+  </nav>
 
-<section class="hero">
-  <div class="avatar-ring">
-    <div class="avatar-inner">
-      <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCBgACAADASIAAhEBAxEB/8QAHQABAAEFAQEBAAAAAAAAAAAAAAECAwQFBwgJ/8QAKhAAAQMDAwMEAwEAAAAAAAAAAQIDBAAFERIhBhNBUWEHMXGBFCKh/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AOJ8S3a" alt="Dark Shadow" />
+  <section class="hero">
+    <div class="avatar-container">
+      <div class="avatar-glow"></div>
+      <div class="avatar-img"><img src="Untitled14_20260303000226.jpg" alt="Shadow"></div>
+    </div>
+    <h1 class="hero-name">DARK SHADOW</h1>
+    <p class="hero-tagline">Computer Science Engineer &bull; Gaming Creator</p>
+  </section>
+
+  <div class="content-grid">
+    <div class="info-card">
+      <h3>✦ Identity</h3>
+      <div class="data-item"><span class="data-label">Birth Date:</span><span class="data-value">May 3, 2010</span></div>
+      <div class="data-item"><span class="data-label">Current Age:</span><span class="data-value">16 Years</span></div>
+      <div class="data-item"><span class="data-label">Height:</span><span class="data-value">160 cm</span></div>
+      <div class="data-item"><span class="data-label">Location:</span><span class="data-value">Egypt</span></div>
+    </div>
+
+    <div class="info-card">
+      <h3>✦ The Setup</h3>
+      <div class="data-item"><span class="data-label">Processor:</span><span class="data-value">Intel i3 10th Gen</span></div>
+      <div class="data-item"><span class="data-label">GPU:</span><span class="data-value">Integrated 8GB</span></div>
+      <div class="data-item"><span class="data-label">Memory:</span><span class="data-value">8GB RAM</span></div>
+      <div class="data-item"><span class="data-label">Display:</span><span class="data-value">60Hz Monitor</span></div>
+    </div>
+
+    <div class="info-card">
+      <h3>✦ Personal Picks</h3>
+      <div class="data-item"><span class="data-label">Best Game:</span><span class="data-value">Valorant</span></div>
+      <div class="data-item"><span class="data-label">Best Anime:</span><span class="data-value">Demon Slayer</span></div>
+      <div class="data-item"><span class="data-label">Food:</span><span class="data-value">Burger</span></div>
+      <div class="data-item"><span class="data-label">Drink:</span><span class="data-value">Hot Chocolate</span></div>
+    </div>
+
+    <div class="info-card">
+      <h3>✦ Sports Life</h3>
+      <div class="data-item"><span class="data-label">Favorite Sport:</span><span class="data-value">Volleyball</span></div>
+      <div class="data-item"><span class="data-label">Active In:</span><span class="data-value">Football</span></div>
+      <div class="data-item"><span class="data-label">Team Role:</span><span class="data-value">Gamer / Athlete</span></div>
     </div>
   </div>
-  <div class="badge">▶ Gaming Creator</div>
-  <h1>DARK_SHADOW</h1>
-  <div class="hero-sub">Gamer · Content Creator · Student</div>
-  <div class="hero-desc">يوتيوبر Gaming، بحب اللعب والمحتوى. طالب هندسة كمبيوتر بيبني حاجات من الصفر.</div>
-  <div class="hero-btns">
-    <button class="btn-glow" onclick="sendPrompt('عايز اضيف سكشن لأحسن العاب اللي بلعبها')">المحتوى</button>
-    <button class="btn-ghost" onclick="sendPrompt('اعمل لي نسخة HTML كاملة من الموقع')">تحميل HTML</button>
-  </div>
-</section>
 
-<div class="stats">
-  <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Hours Gaming</div></div>
-  <div class="stat"><div class="stat-num">3+</div><div class="stat-label">Platforms</div></div>
-  <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Passion</div></div>
-</div>
-
-<div class="section">
-  <div class="section-tag">// connect</div>
-  <div class="section-title">تابعني على</div>
-  <div class="social-grid">
-    <a class="social-card" href="http://www.youtube.com/@shadows-s1" target="_blank">
-      <div class="platform-icon">▶</div>
-      <div class="platform-name">YouTube</div>
-      <div class="platform-handle">@shadows-s1</div>
-      <div class="platform-arrow">→ اشترك في القناة</div>
-    </a>
-    <a class="social-card" href="https://www.tiktok.com/@mrshadowx241" target="_blank">
-      <div class="platform-icon">♪</div>
-      <div class="platform-name">TikTok</div>
-      <div class="platform-handle">@mrshadowx241</div>
-      <div class="platform-arrow">→ تابع على تيك توك</div>
-    </a>
-    <a class="social-card" href="https://www.instagram.com/darkshadow3332/" target="_blank">
-      <div class="platform-icon">◈</div>
-      <div class="platform-name">Instagram</div>
-      <div class="platform-handle">@darkshadow3332</div>
-      <div class="platform-arrow">→ تابع على إنستا</div>
-    </a>
-  </div>
-</div>
-
-<div class="section" style="padding-top:0;">
-  <div class="section-tag">// about</div>
-  <div class="section-title">مين أنا؟</div>
-  <div class="about-box">
-    <div class="about-text">
-      طالب هندسة كمبيوتر وyoutuber Gaming. بعمل محتوى gaming ومشاركه مع الناس بأسلوبي الخاص.
-    </div>
-    <div class="about-text">
-      Gaming مش بس هواية — ده أسلوب حياة. كل فيديو فيه حاجة جديدة تتعلمها أو لحظة تتبسطها.
-      <div class="tags">
-        <span class="tag">Gaming</span>
-        <span class="tag">YouTube</span>
-        <span class="tag">CS Student</span>
-        <span class="tag">Content Creator</span>
-      </div>
+  <div class="social-section">
+    <h2 class="section-heading">Find Me Everywhere</h2>
+    <div class="social-tiles">
+      <a href="http://www.youtube.com/@shadows-s1" class="social-tile" target="_blank">
+        <span class="tile-icon">▶</span>
+        <span class="tile-name">YouTube</span>
+        <span class="tile-action">Subscribe Now</span>
+      </a>
+      <a href="https://www.tiktok.com/@mrshadowx241" class="social-tile" target="_blank">
+        <span class="tile-icon">♪</span>
+        <span class="tile-name">TikTok</span>
+        <span class="tile-action">Follow for Clips</span>
+      </a>
+      <a href="https://www.instagram.com/darkshadow3332/" class="social-tile" target="_blank">
+        <span class="tile-icon">📸</span>
+        <span class="tile-name">Instagram</span>
+        <span class="tile-action">See My Life</span>
+      </a>
+      <a href="#" class="social-tile">
+        <span class="tile-icon">💬</span>
+        <span class="tile-name">Discord</span>
+        <span class="tile-action">Join Community</span>
+      </a>
     </div>
   </div>
-</div>
 
-<footer>
-  &copy; 2026 DARK_SHADOW — play hard, create harder
-</footer>
+  <div class="stats-bar">
+    <div class="stat-item"><span class="stat-num">47</span><span class="stat-label">Games Mastered</span></div>
+    <div class="stat-item"><span class="stat-num">12</span><span class="stat-label">Videos Created</span></div>
+    <div class="stat-item"><span class="stat-num">99</span><span class="stat-label">Shadow LVL</span></div>
+  </div>
+
+  <footer class="footer">
+    DARK SHADOW © 2026 | ALL RIGHTS RESERVED | EMPOWERED BY TECH
+  </footer>
+</div>
 
 <script>
-// Fix avatar with actual uploaded image
-const img = document.querySelector('.avatar-inner img');
-img.src = 'data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQ==';
-// Use placeholder since we can't embed the full image
-img.style.background = 'linear-gradient(135deg, #1a1a2e, #16213e)';
-img.style.display = 'flex';
-img.onerror = function() {
-  this.style.display = 'none';
-  this.parentElement.style.background = 'linear-gradient(135deg, #1a1a2e, #2d1b69)';
-  this.parentElement.innerHTML = '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:40px;">👤</div>';
-};
-img.onerror();
+// جزيئات الخلفية
+(function() {
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 60; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.top = Math.random() * 100 + '%';
+    p.style.animationDuration = (6 + Math.random() * 12) + 's';
+    p.style.animationDelay = (Math.random() * 5) + 's';
+    container.appendChild(p);
+  }
+})();
 </script>
 
-<img src="image.jpg" alt="real_.jpg">
+</body>
+</html>
